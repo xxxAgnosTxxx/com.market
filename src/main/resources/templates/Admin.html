@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body{
+            text-align: center;
+            background-image: url(https://odesign.ru/wp-content/uploads/6710-r1.jpg);
+            background-attachment: fixed;
+        }
+        h1{
+            font-size: 40px;
+            margin-top: 10px;
+        }
+        table {
+            margin: auto;
+            width:1300px;
+            border-spacing: 0 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bold;
+        }
+        th {
+            padding: 10px 20px;
+            background: #616912;
+            color: #F9C941;
+            border-right: 2px solid;
+            font-size: 0.9em;
+            font-size: 30px;
+        }
+        th:last-child {
+            border-right: none;
+        }
+        td {
+            background-color: white;
+            vertical-align: middle;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+            border-top: 2px solid #56433D;
+            border-bottom: 2px solid #56433D;
+            border-right: 2px solid #56433D;
+            border-left: 2px solid #56433D;
+            font-size: 30px;
+        }
+        button{
+            background-color: #bab754;;
+            text-align: center;
+            padding: 7px;
+            font-size: 25px;
+        }
+        button{
+            text-align: center;
+            padding: 7px;
+            font-size: 25px;
+            display: inline-block;
+            text-decoration: none;
+            user-select: none;
+            padding: .25em .5em;
+            outline: none;
+            border: 1px solid rgb(250,172,17);
+            border-radius: 7px;
+            background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+            box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+            transition: box-shadow .2s, border-color .2s;
+        }
+        button:hover {
+            box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+        }
+        button:active {
+            padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+            border-color: rgba(177,159,0,1);
+            box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+        }
+        .headbtn{
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top:20px;
+            align-items: center;
+        }
+        .cnt{
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        input{
+            font-size: 18px;
+            border: 2px green solid;
+            border-radius: 2px;
+        }
+        .search{
+            border: 2px black solid;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            margin-bottom: 0px;
+            background-color: white;
+            margin-right: 30px;
+        }
+        #btncnl{
+            background: linear-gradient(#FB9575, #F45A38 48%, #EA1502 52%, #F02F17);
+            box-shadow: 0 0 0 60px rgba(0,0,0,0) inset, .1em .1em .2em #800;
+            padding: 8px;
+        }
+        .sort {
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 19px;
+          display: inline-block;
+          color: #fff;
+          text-decoration: none;
+          text-shadow: 0 -1px rgba(0,0,0,.5);
+          user-select: none;
+          padding: .5em .5em;
+          border: 1px solid rgb(80,32,0);
+          border-radius: 5px;
+          outline: none;
+          background: rgb(147,80,36) linear-gradient(rgb(106,58,26), rgb(147,80,36) 80%);
+          box-shadow:
+           0 6px rgb(86,38,6),
+           0 3px 15px rgba(0,0,0,.4),
+           inset 0 1px rgba(255,255,255,.3),
+           inset 0 0 3px rgba(255,255,255,.5);
+          transition: .2s;
+        }
+        .sort:hover {
+          background: rgb(167,91,41) linear-gradient(rgb(126,69,31), rgb(167,91,41) 80%);
+        }
+        .sort:active {
+          background: rgb(120,63,25) linear-gradient(rgb(120,63,25) 20%, rgb(167,91,41));
+          box-shadow:
+           0 2px rgb(86,38,6),
+           0 1px 6px rgba(0,0,0,.4),
+           inset 0 1px rgba(255,255,255,.3),
+           inset 0 0 3px rgba(255,255,255,.5);
+          -webkit-transform: translate(0, 4px);
+          transform: translate(0, 4px);
+        }
+        .catalog{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="headbtn">
+            <div class="cnt"><form action="/"><button type="submit"><strong>На главную</strong></button></form></div>
+            <div class="cnt"><form action="/AdminChat" method="get"><button type="submit"><strong>Чат с клиентами</strong></button></form></div>
+        </div>
+    </header>
+    <h1>Режим администратора</h1>
+    <h2>Доступно изменение, добавление информации о товарах в базу данных.</h2>
+    <div class="headbtn">
+        <div class="cnt"><form action="/Itemchanging"><button type="submit"><strong>Изменить товар</strong></button></form></div>
+        <div class="cnt"><form action="/Additem"><button type="submit"><strong>Добавить товар</strong></button></form></div>
+        <div class="cnt"><form action="/Allorders"><button type="submit"><strong>Список заказов</strong></button></form></div>
+    </div>
+    <div class="headbtn">
+        <div class="cnt">
+            <div class="search">
+                <form action="/Admin" method="post">
+                    <input type="text" name="itemname" placeholder="Дуб">
+                    <input type="hidden" name="btn" value="search">
+                    <button class="sort" type="submit"><strong>Искать товар</strong></button>
+                </form>
+            </div>
+        </div>
+        <div class="cnt">
+            <form action="/Admin" method="get">
+                <button class="sort" id="btncnl" type="submit"><strong><p style="color: #fff; margin:0">Сбросить</p></strong></button>
+            </form>
+        </div>
+    </div>
+    <div class="catalog">
+        <div style="border: 2px solid black; background-color: thistle; margin-top:10px; padding:5px;">
+            <table>
+                <tr>
+                    <th>Код товара</th>
+                    <th>Название товара</th>
+                    <th>Цена, руб.</th>
+                    <th>Количество на складе, шт.</th>
+                </tr>
+                <div th:each="el : ${items}">
+                    <tr>
+                        <td th:text="${el.getId()}"></td>
+                        <td th:text="${el.getName()}"></td>
+                        <td th:text="${el.getPrice()}"></td>
+                        <td th:text="${el.getSum()}"></td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

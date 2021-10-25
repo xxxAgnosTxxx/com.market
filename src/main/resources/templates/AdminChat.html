@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Adminchat</title>
+    <style>
+        body{
+            text-align: center;
+            background-image: url(https://odesign.ru/wp-content/uploads/6710-r1.jpg);
+            background-attachment: fixed;
+        }
+        h1{
+            font-size: 40px;
+        }
+        p{
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+        input{
+            font-size: 20px;
+        }
+        .headbtn{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        button{
+            margin-top: 10px;
+            margin-left: 70px;
+            margin-right: 70px;
+            text-align: center;
+            padding: 7px;
+            font-size: 25px;
+            display: inline-block;
+            text-decoration: none;
+            user-select: none;
+            padding: .25em .5em;
+            outline: none;
+            border: 1px solid rgb(250,172,17);
+            border-radius: 7px;
+            background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+            box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+            transition: box-shadow .2s, border-color .2s;
+        }
+        button:hover {
+            box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+        }
+        button:active {
+            padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+            border-color: rgba(177,159,0,1);
+            box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+        }
+        .btnadd{
+            background: rgb(64,199,129);
+            box-shadow: 0 -3px rgb(53,167,110) inset;
+            margin-top: 20px;
+        }
+        .form{
+            width: 400px;
+            border: 2px black solid;
+            background-color: #FFFFF0;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+        table {
+            margin: 0px;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 1500px;
+            border-spacing: 0 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bold;
+        }
+        th {
+            padding: 10px 20px;
+            background: #616912;
+            color: #F9C941;
+            border-right: 2px solid;
+            font-size: 24px;
+        }
+        td {
+            background-color: white;
+            vertical-align: middle;
+            padding: 10px;
+            text-align: center;
+            border-top: 2px solid #56433D;
+            border-bottom: 2px solid #56433D;
+            border-right: 2px solid #56433D;
+            border-left: 2px solid #56433D;
+            font-size: 24px;
+        }
+        .catalog{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .btnadd{
+            background: rgb(64,199,129);
+            box-shadow: 0 -3px rgb(53,167,110) inset;
+            margin-top: 30px;
+        }
+        .form{
+            width: 350px;
+            border: 2px black solid;
+            background-color: #ebcacb;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+        textarea{
+            max-width: 300px;
+            min-width: 300px;
+            min-height: 34px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="headbtn">
+        <div class="cnt">
+            <form action="/Admin" method="get"><button type="submit"><strong>В кабинет</strong></button></form>
+        </div>
+        <div class="cnt">
+            <form action="/"><button type="submit"><strong>На главную</strong></button></form>
+        </div>
+    </div>
+    <h1>Чат с клиентами</h1>
+    <h2>При необходимости увеличьте площадь окна сообщения, потянув за него в правом нижнем углу</h2>
+    <div class="form">
+        <form style="padding-bottom: 10px" action="/AdminChat" method="post">
+            <p>Введите номер вопроса: </p><input type="number" name="num" placeholder="1"><br>
+            <p style="margin-top:5px">Текст ответа: </p><textarea type="text" name="Answer" placeholder="Здравствуйте, перезвоните позднее"></textarea><br>
+            <button class="btnadd" type="submit">Отправить</button>
+        </form>
+    </div>
+
+    <div class="catalog">
+        <div style="border: 2px solid black; background-color: thistle; margin-top:10px;">
+            <table>
+                <tr>
+                    <th>№ вопроса</th>
+                    <th>Id клиента</th>
+                    <th>Вопрос клиента</th>
+                    <th>Ответ</th>
+                    <th>Дата</th>
+                </tr>
+                <div th:each="el : ${chat}">
+                    <tr>
+                        <td th:text="${el.getId()}"></td>
+                        <td th:text="${el.getIduser()}"></td>
+                        <td th:text="${el.getQuestion()}"></td>
+                        <td th:text="${el.getAnswer()}"></td>
+                        <td th:text="${el.getDate()}"></td>
+                    </tr>
+                </div>
+            </table>
+        </div>
+    </div>
+</header>
+</body>
+</html>

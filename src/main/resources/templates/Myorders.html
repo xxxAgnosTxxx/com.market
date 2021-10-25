@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>MyOrders</title>
+</head>
+    <style>
+        body{
+            text-align: center;
+            background-image: url(https://odesign.ru/wp-content/uploads/6710-r1.jpg);
+            background-attachment: fixed;
+        }
+        h1{
+            margin-top: 10px;
+            font-size: 40px;
+        }
+        table {
+            margin: 0px;
+            padding-left: 10px;
+            padding-right: 10px;
+            width:1000px;
+            border-spacing: 0 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bold;
+        }
+        th {
+            padding: 10px 20px;
+            background: #616912;
+            color: #F9C941;
+            border-right: 2px solid;
+            font-size: 0.9em;
+            font-size: 30px;
+        }
+        td {
+            background-color: white;
+            vertical-align: middle;
+            padding: 10px;
+            font-size: 14px;
+            text-align: center;
+            border-top: 2px solid #56433D;
+            border-bottom: 2px solid #56433D;
+            border-right: 2px solid #56433D;
+            border-left: 2px solid #56433D;
+            font-size: 30px;
+        }
+        button{
+            text-align: center;
+            padding: 7px;
+            font-size: 25px;
+            display: inline-block;
+            text-decoration: none;
+            user-select: none;
+            padding: .25em .5em;
+            outline: none;
+            border: 1px solid rgb(250,172,17);
+            border-radius: 7px;
+            background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+            box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+            transition: box-shadow .2s, border-color .2s;
+        }
+        button:hover {
+            box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+        }
+        button:active {
+            padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+            border-color: rgba(177,159,0,1);
+            box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+        }
+        p{
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+        .headbtn{
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .cnt{
+            margin-top: 10px;
+            margin-left: 70px;
+            margin-right: 70px;
+        }
+        .catalog{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .btnadd{
+            background: rgb(64,199,129);
+            box-shadow: 0 -3px rgb(53,167,110) inset;
+            margin-top: 30px;
+        }
+        .catalog{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        table{
+           border: 2px solid black;
+            background-color: thistle;
+            margin-top:10px;
+        }
+    </style>
+<body>
+    <header>
+        <div class="headbtn">
+            <div class="cnt"><form action="/Sign" method="get">
+                <button type="submit"><strong>В кабинет</strong></button>
+            </form></div>
+            <div class="cnt"><form action="/" method="get"><button type="submit"><strong>На главную</strong></button></form></div>
+        </div>
+    </header>
+    <h1>История заказов</h1>
+    <div class="catalog">
+        <table>
+            <tr>
+                <th style="text-align: center">Название товара</th>
+                <th>Количество в заказе, шт.</th>
+                <th>Цена единицы товара, руб.</th>
+                <th>Всего, руб.</th>
+            </tr>
+            <div th:each="el : ${ListOrders}">
+                <tr>
+                    <td th:text="${el.getItemname()}"></td>
+                    <td th:text="${el.getSum()}"></td>
+                    <td th:text="${el.getPrice()}"></td>
+                    <td th:text="${el.getTotal()}"></td>
+                </tr>
+            </div>
+        </table>
+    </div>
+</body>
+</html>
